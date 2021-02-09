@@ -16,3 +16,8 @@ Stack (agora eu sei mais ou menos):
 - Docker
 - Laravel 8
 - PostgreSQL 13
+
+<br>
+
+Metodologias de Desenvolvimento:
+- eXtreme Go Horse Process
