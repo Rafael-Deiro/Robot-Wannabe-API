@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  laravel:
+    restart: always
+    working_dir: /var/www/rwbapp
+    depends_on:
+      - nginx
+      - postgresql
+    build:
+      context: ./
+      dockerfile: .docker/laravel/Dockerfile
+    volumes:
+      - ./:/var/www/rwbapp
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./:/var/www/rwbapp
+    networks:
+      - app-network
+
+  postgresql:
+    image: postgres:13-alpine
+    restart: always
+    shm_size: 256MB
+    environment:
+      POSTGRES_INITDB_ARGS: "-E UTF-8 --locale=pt_BR"
+      POSTGRES_PASSWORD: mroboto123
+      POSTGRES_USER: robotwannabe_user
+      POSTGRES_DB: robotwannabe_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    networks:
+      - app-network
+
+  pgadmin4:
+    image: dpage/pgadmin4:4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mroboto@pgadmin.com
+      PGADMIN_DEFAULT_PASSWORD: mroboto123
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local
+  pgadmin-data:
+    driver: local
