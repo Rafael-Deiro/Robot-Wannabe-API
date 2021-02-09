@@ -28,7 +28,7 @@ services:
       - app-network
 
   postgresql:
-    image: postgres:alpine
+    image: postgres:13-alpine
     restart: always
     shm_size: 256MB
     environment:
