@@ -16,3 +16,6 @@ Stack (nem sei ainda):
 - Laravel
 - Docker
 - PostgreSQL
+
+Metodologias de Desenvolvimento:
+- eXtreme Go Horse Process
