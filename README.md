@@ -12,7 +12,7 @@ O objetivo é criar uma API para simular um "robô" que possuirá tarefas diári
 
 <br>
 
-Stack (nem sei ainda):
-- Laravel
+Stack (agora eu sei mais ou menos):
 - Docker
-- PostgreSQL
+- Laravel 8
+- PostgreSQL 13
