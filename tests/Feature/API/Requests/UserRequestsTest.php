@@ -14,13 +14,15 @@ class UserRequestsTest extends TestCase
 
     public function test_user_can_authenticate_with_sanctum()
     {
-        Sanctum::actingAs(
+        $user = Sanctum::actingAs(
             User::factory()->create(),
             ['*']
         );
 
-        $response = $this->get('/api/user');
+        $response = $this->getJson('/api/user');
+
         $response->assertOk();
+        $response->assertJsonPath('email', $user->email);
     }
 
     public function test_user_can_create_token()
